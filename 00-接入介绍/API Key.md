@@ -55,4 +55,4 @@ Content-Type: application/json
 - Anthropic 格式会用 `x-api-key`
 - Gemini 格式会用 `x-goog-api-key`
 
-但它们本质上仍然填写的是你的 ApiHalo Key，不是上游原站 Key。
+但它们本质上仍然填写的是你的 ApiHalo Key。
