@@ -20,6 +20,13 @@
 | 请求地址 | `https://apihalo.com/v1beta/models/{model}:generateContent` |
 | 模型名 | 先通过 `/v1beta/models` 或 `/v1/models` 获取 |
 
+```text
+# 基础配置
+Request URL = "https://apihalo.com/v1beta/models/{model}:generateContent"
+API Key = "你的 ApiHalo API Key"
+Model = "请替换为 /v1beta/models 或 /v1/models 返回的真实模型 ID"
+```
+
 ## 三、请求地址
 
 ```text

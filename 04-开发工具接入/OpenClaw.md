@@ -21,10 +21,13 @@ curl https://apihalo.com/v1/models \
 
 ### 第 2 步：填写方式
 
-- Provider：`OpenAI` / `OpenAI Compatible` / `Custom`
-- Base URL：`https://apihalo.com/v1`
-- API Key：ApiHalo API Key
-- Model：从 `GET /v1/models` 返回结果中选择
+```text
+# 基础配置
+Provider = "OpenAI Compatible"
+Base URL = "https://apihalo.com/v1"
+API Key = "你的 ApiHalo API Key"
+Model = "请替换为 /v1/models 返回的真实模型 ID"
+```
 
 ### 第 3 步：完成一次简单测试
 

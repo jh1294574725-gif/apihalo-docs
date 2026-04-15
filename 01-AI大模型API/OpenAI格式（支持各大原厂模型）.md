@@ -27,6 +27,13 @@
 | Base URL | `https://apihalo.com/v1` |
 | 模型名称 | 先通过 `/v1/models` 获取 |
 
+```text
+# 基础配置
+Base URL = "https://apihalo.com/v1"
+API Key = "你的 ApiHalo API Key"
+Model = "请替换为 /v1/models 返回的真实模型 ID"
+```
+
 ## 三、快速接入流程
 
 ### 第 1 步：先获取可用模型

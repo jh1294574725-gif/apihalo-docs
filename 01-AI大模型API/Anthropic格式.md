@@ -23,6 +23,14 @@
 | 协议版本头 | `anthropic-version: 2023-06-01` |
 | 模型名 | 先通过 `/v1/models` 获取 |
 
+```text
+# 基础配置
+Request URL = "https://apihalo.com/v1/messages"
+API Key = "你的 ApiHalo API Key"
+anthropic-version = "2023-06-01"
+Model = "请替换为 /v1/models 返回的真实模型 ID"
+```
+
 ## 三、请求地址
 
 ```text

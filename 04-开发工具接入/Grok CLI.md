@@ -21,9 +21,12 @@ curl https://apihalo.com/v1/models \
 
 ### 第 2 步：填写方式
 
-- Endpoint / Base URL：`https://apihalo.com/v1`
-- API Key：ApiHalo API Key
-- Model：使用 `/v1/models` 返回的模型 ID
+```text
+# 基础配置
+Endpoint / Base URL = "https://apihalo.com/v1"
+API Key = "你的 ApiHalo API Key"
+Model = "请替换为 /v1/models 返回的真实模型 ID"
+```
 
 如果 CLI 会自动补 `/v1`，Base URL 改填：
 

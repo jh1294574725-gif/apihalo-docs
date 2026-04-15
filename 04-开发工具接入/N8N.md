@@ -23,9 +23,12 @@ curl https://apihalo.com/v1/models \
 
 如果你的 N8N 版本支持自定义 OpenAI Base URL：
 
-- Base URL：`https://apihalo.com/v1`
-- API Key：ApiHalo API Key
-- Model：从 `/v1/models` 返回结果选择
+```text
+# OpenAI 节点配置
+Base URL = "https://apihalo.com/v1"
+API Key = "你的 ApiHalo API Key"
+Model = "请替换为 /v1/models 返回的真实模型 ID"
+```
 
 ### 第 3 步：方式二，HTTP Request 节点
 

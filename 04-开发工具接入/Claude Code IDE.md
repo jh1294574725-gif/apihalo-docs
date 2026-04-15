@@ -21,9 +21,12 @@ curl https://apihalo.com/v1/models \
 
 ### 第 2 步：在插件设置中填写
 
-- Base URL：`https://apihalo.com/v1`
-- API Key：ApiHalo API Key
-- Model：以 `/v1/models` 为准
+```text
+# 基础配置
+Base URL = "https://apihalo.com/v1"
+API Key = "你的 ApiHalo API Key"
+Model = "请替换为 /v1/models 返回的真实模型 ID"
+```
 
 ### 第 3 步：保存并测试
 

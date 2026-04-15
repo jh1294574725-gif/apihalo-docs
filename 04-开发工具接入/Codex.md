@@ -85,24 +85,25 @@ Windows: C:\Users\你的用户名\.codex\config.toml
 把下面内容写入 `config.toml`：
 
 ```toml
-model = "YOUR_MODEL_ID"
+# 基础配置
 model_provider = "apihalo"
+model = "请替换为 /v1/models 返回的真实模型 ID"
 
+# ApiHalo 自定义 Provider 配置
 [model_providers.apihalo]
 name = "ApiHalo"
 base_url = "https://apihalo.com/v1"
-wire_api = "responses"
 env_key = "APIHALO_API_KEY"
-env_key_instructions = "Set APIHALO_API_KEY in your environment"
+wire_api = "responses"
 ```
 
 参数说明：
 
-- `model`：替换为你从 `/v1/models` 获取到的真实模型 ID
 - `model_provider`：这里固定写成自定义 provider 名称，例如 `apihalo`
+- `model`：替换为你从 `/v1/models` 获取到的真实模型 ID
 - `base_url`：填写 ApiHalo 的接口根地址
-- `wire_api = "responses"`：Codex 自定义 provider 使用 `Responses API`
 - `env_key`：表示让 Codex 从环境变量读取 ApiHalo Key
+- `wire_api = "responses"`：Codex 自定义 provider 使用 `Responses API`
 
 完成标准接入只需要以上这些核心字段。网络上如果看到其他示例带有额外配置项，请以你当前 Codex 版本的实际要求为准；在没有明确要求时，不需要额外补写。
 
@@ -160,15 +161,16 @@ Codex CLI 与 Codex IDE Extension 共用同一套底层配置。
 ## 四、完整示例
 
 ```toml
-model = "YOUR_MODEL_ID"
+# 基础配置
 model_provider = "apihalo"
+model = "请替换为 /v1/models 返回的真实模型 ID"
 
+# ApiHalo 自定义 Provider 配置
 [model_providers.apihalo]
 name = "ApiHalo"
 base_url = "https://apihalo.com/v1"
-wire_api = "responses"
 env_key = "APIHALO_API_KEY"
-env_key_instructions = "Set APIHALO_API_KEY in your environment"
+wire_api = "responses"
 ```
 
 ## 五、常见问题

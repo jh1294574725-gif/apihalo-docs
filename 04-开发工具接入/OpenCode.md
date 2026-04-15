@@ -23,10 +23,13 @@ curl https://apihalo.com/v1/models \
 
 不同版本的 OpenCode 字段名称可能略有差异，可按下列原则填写：
 
-- Provider：`OpenAI` / `Compatible`
-- Base URL：`https://apihalo.com/v1`
-- API Key：ApiHalo API Key
-- Model：从 `/v1/models` 返回结果中选择
+```text
+# 基础配置
+Provider = "OpenAI Compatible"
+Base URL = "https://apihalo.com/v1"
+API Key = "你的 ApiHalo API Key"
+Model = "请替换为 /v1/models 返回的真实模型 ID"
+```
 
 如果客户端会自动补 `/v1`，Base URL 改填：
 

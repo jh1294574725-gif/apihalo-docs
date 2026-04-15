@@ -25,10 +25,15 @@ curl https://apihalo.com/v1/models \
 
 不同版本界面字段名称可能略有差异，但填写原则一致：
 
-- Provider：`OpenAI Compatible` 或 `Custom OpenAI`
-- Base URL：`https://apihalo.com/v1`
-- API Key：ApiHalo API Key
-- Model：使用 `/v1/models` 返回的模型 ID
+```text
+# 基础配置
+Provider = "OpenAI Compatible"
+Base URL = "https://apihalo.com/v1"
+API Key = "你的 ApiHalo API Key"
+Model = "请替换为 /v1/models 返回的真实模型 ID"
+```
+
+如果当前版本显示的是 `Custom OpenAI`、`Compatible` 或其他近似名称，按同义字段填写即可。
 
 如果客户端会自动拼接 `/v1`，Base URL 改填：
 
