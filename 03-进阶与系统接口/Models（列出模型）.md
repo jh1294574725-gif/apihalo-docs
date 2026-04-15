@@ -17,11 +17,30 @@ curl https://apihalo.com/v1/models \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
-## 你应该如何使用它
+## 响应中重点看什么
 
 - 使用返回结果中的 `data[].id` 作为真实模型 ID
 - 使用返回结果中的 `supported_endpoint_types` 判断模型端点类型
 - 不要照搬别的平台模型清单
+
+## 响应示例
+
+```json
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "YOUR_MODEL_ID",
+      "object": "model",
+      "owned_by": "apihalo",
+      "supported_endpoint_types": [
+        "openai",
+        "openai-response"
+      ]
+    }
+  ]
+}
+```
 
 ## 常见返回字段
 
@@ -32,7 +51,7 @@ curl https://apihalo.com/v1/models \
 
 ## `supported_endpoint_types` 怎么看
 
-你可以把它理解为“这个模型当前支持哪类接口入口”。
+它表示这个模型当前可用的接口入口类型。
 
 常见用途：
 
@@ -40,11 +59,25 @@ curl https://apihalo.com/v1/models \
 - 判断是否属于图像、视频、Rerank 等专项能力
 - 辅助前端筛选模型分类
 
+常见值说明：
+
+- `openai`：可用于 `POST /v1/chat/completions`
+- `openai-response`：可用于 `POST /v1/responses`
+- `openai-response-compact`：可用于 `POST /v1/responses/compact`
+- `image-generation`：可用于 `POST /v1/images/generations`
+- `jina-rerank`：可用于 `POST /v1/rerank`
+
+其中：
+
+- 普通 SDK、聊天工具通常优先使用 `openai`
+- Codex 这类自定义 Provider 场景优先验证 `openai-response`
+
 ## 正确接入顺序
 
 1. 拉取 `/v1/models`
 2. 从结果中选一个模型
-3. 再发起正式请求
+3. 按模型能力选择对应端点
+4. 再发起正式请求
 
 ## 错误示例
 
