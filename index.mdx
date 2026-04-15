@@ -1,0 +1,50 @@
+---
+title: "ApiHalo 接入文档"
+description: "ApiHalo 面向客户的统一 AI API 接入文档。"
+---
+
+# ApiHalo 接入文档
+
+欢迎使用 ApiHalo。
+
+如果你是第一次接入，建议按下面顺序阅读：
+
+1. [平台简介](00-接入介绍/平台简介)
+2. [控制台（入门）](00-接入介绍/控制台（入门）)
+3. [API Key](00-接入介绍/API%20Key)
+4. [Base URL](00-接入介绍/Base%20URL)
+5. [OpenAI格式（支持各大原厂模型）](01-AI大模型API/OpenAI格式（支持各大原厂模型）)
+6. [Models（列出模型）](03-进阶与系统接口/Models（列出模型）)
+7. [支持矩阵](03-进阶与系统接口/支持矩阵)
+8. [常见问题](常见问题)
+
+## 三条最重要的规则
+
+1. 客户可用模型始终以 `GET https://apihalo.com/v1/models` 返回结果为准。
+2. 客户永远使用 ApiHalo 的 `API Key` 和 `Base URL`，不要直接按上游平台文档填写。
+3. 为了保证后续更换上游后仍可继续使用，默认优先按 `OpenAI Compatible` 文档接入。
+
+## 默认推荐接法
+
+对于绝大多数客户，最推荐的公开接入流程只有两步：
+
+1. `GET https://apihalo.com/v1/models`
+2. `POST https://apihalo.com/v1/chat/completions`
+
+## 文档栏目
+
+- `00-接入介绍`：新用户入门、控制台、API Key、Base URL
+- `01-AI大模型API`：OpenAI、Anthropic、Gemini、视频、图片、Suno、Midjourney 等能力
+- `02-搜索阅读API`：网页阅读、联网搜索、OCR 与文档解析
+- `03-进阶与系统接口`：错误码、模型列表、账户信息、支持矩阵
+- `04-开发工具接入`：Codex、Cline、N8N、Claude Code 等工具接入方式
+
+## 补充说明
+
+如果你的客户端只支持 `OpenAI` 或 `OpenAI Compatible`，优先阅读：
+
+- [OpenAI格式（支持各大原厂模型）](01-AI大模型API/OpenAI格式（支持各大原厂模型）)
+
+如果你需要完整的栏目导航，也可以直接查看：
+
+- [文档目录](文档目录)
