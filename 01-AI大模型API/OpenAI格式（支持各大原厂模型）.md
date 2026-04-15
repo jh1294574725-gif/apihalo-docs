@@ -4,9 +4,9 @@
 
 这是 ApiHalo 默认推荐、也是最稳的公开接入方式。
 
-只要你的 SDK、客户端或第三方工具支持 `OpenAI` 或 `OpenAI Compatible`，都优先按本页接入。
+只要 SDK、客户端或第三方工具支持 `OpenAI`、`OpenAI Compatible` 或 `Custom OpenAI`，都建议优先按本页接入。
 
-## 适用范围
+## 一、适用范围
 
 - 文本与对话
 - 代码生成
@@ -17,18 +17,19 @@
 - 音频识别与合成
 - 视频生成
 
-## 接入前只需要两项信息
+## 二、接入前准备
 
-- `API Key`
-- `Base URL`
+接入前只需要 3 项核心信息：
 
-默认地址：
+| 配置项 | 推荐值 |
+| --- | --- |
+| API Key | 控制台创建的 ApiHalo API Key |
+| Base URL | `https://apihalo.com/v1` |
+| 模型名称 | 先通过 `/v1/models` 获取 |
 
-```text
-https://apihalo.com/v1
-```
+## 三、快速接入流程
 
-## 第一步：先获取可用模型
+### 第 1 步：先获取可用模型
 
 ```bash
 curl https://apihalo.com/v1/models \
@@ -41,7 +42,7 @@ curl https://apihalo.com/v1/models \
 - 不要直接照搬其他平台模型名
 - 可用模型以当前 Key 的返回结果为准
 
-## 第二步：标准对话请求
+### 第 2 步：发起标准对话请求
 
 ```bash
 curl https://apihalo.com/v1/chat/completions \
@@ -56,7 +57,7 @@ curl https://apihalo.com/v1/chat/completions \
   }'
 ```
 
-## 流式输出
+### 第 3 步：如果需要流式输出
 
 ```bash
 curl -N https://apihalo.com/v1/chat/completions \
@@ -71,11 +72,11 @@ curl -N https://apihalo.com/v1/chat/completions \
   }'
 ```
 
-## 多模态理解
+## 四、多模态理解
 
-如果你的模型支持多模态输入，可以继续使用 `POST /v1/chat/completions`。
+如果目标模型支持多模态输入，可以继续使用 `POST /v1/chat/completions`。
 
-支持的常见内容类型包括：
+常见内容类型包括：
 
 - `text`
 - `image_url`
@@ -137,11 +138,11 @@ curl https://apihalo.com/v1/chat/completions \
 说明：
 
 - 文件理解能力不等于开放 `/v1/files`
-- 客户公开接入不要把 `/v1/files` 当作前提
+- 公开接入不要把 `/v1/files` 当作前提
 
-## Embeddings
+## 五、专项能力接入示例
 
-如果你的账号已开通向量模型：
+### 1. Embeddings
 
 ```bash
 curl https://apihalo.com/v1/embeddings \
@@ -153,9 +154,7 @@ curl https://apihalo.com/v1/embeddings \
   }'
 ```
 
-## 图像生成
-
-如果你的账号已开通图像模型：
+### 2. 图像生成
 
 ```bash
 curl https://apihalo.com/v1/images/generations \
@@ -167,9 +166,7 @@ curl https://apihalo.com/v1/images/generations \
   }'
 ```
 
-## 音频转写
-
-如果你的账号已开通音频模型：
+### 3. 音频转写
 
 ```bash
 curl https://apihalo.com/v1/audio/transcriptions \
@@ -178,9 +175,7 @@ curl https://apihalo.com/v1/audio/transcriptions \
   -F "file=@/path/to/demo.mp3"
 ```
 
-## 视频生成
-
-如果你的账号已开通视频模型：
+### 4. 视频生成
 
 ```bash
 curl https://apihalo.com/v1/videos \
@@ -203,7 +198,9 @@ curl -L https://apihalo.com/v1/videos/YOUR_TASK_ID/content \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
-## Python 示例
+## 六、SDK 示例
+
+### Python
 
 ```python
 from openai import OpenAI
@@ -221,7 +218,7 @@ resp = client.chat.completions.create(
 print(resp.choices[0].message.content)
 ```
 
-## Node.js 示例
+### Node.js
 
 ```javascript
 import OpenAI from "openai";
@@ -239,22 +236,9 @@ const resp = await client.chat.completions.create({
 console.log(resp.choices[0].message.content);
 ```
 
-## 公开推荐的端点
-
-- `GET /v1/models`
-- `POST /v1/chat/completions`
-- `POST /v1/embeddings`
-- `POST /v1/images/generations`
-- `POST /v1/audio/transcriptions`
-- `POST /v1/audio/translations`
-- `POST /v1/audio/speech`
-- `POST /v1/responses`
-- `POST /v1/rerank`
-- `POST /v1/videos`
-
-## 最重要的注意事项
+## 七、最重要的注意事项
 
 - 默认优先使用 `chat/completions`
 - 图片、文件、音频、视频理解也优先考虑 `chat/completions` 多模态输入
-- 高级参数如 `tools`、`tool_choice`、`response_format`、`reasoning` 按模型开放
-- 模型、能力、可见范围都以 `/v1/models` 返回结果为准
+- 高级参数如 `tools`、`tool_choice`、`response_format`、`reasoning` 都是按模型开放
+- 模型、能力、可见范围始终以 `/v1/models` 返回结果为准

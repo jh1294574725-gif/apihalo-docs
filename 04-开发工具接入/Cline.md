@@ -4,20 +4,22 @@
 
 Cline 一般按 `OpenAI Compatible` 方式接入。
 
-## 接入前准备
+## 一、接入前准备
 
 - ApiHalo API Key
 - ApiHalo Base URL：`https://apihalo.com/v1`
 - 一个来自 `GET /v1/models` 的真实模型 ID
 
-## 第一步：先获取模型
+## 二、快速接入
+
+### 第 1 步：先获取模型
 
 ```bash
 curl https://apihalo.com/v1/models \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
-## 第二步：填写 Cline 配置
+### 第 2 步：填写 Cline 配置
 
 不同版本的字段名称可能不同，但填写逻辑一致：
 
@@ -32,7 +34,7 @@ curl https://apihalo.com/v1/models \
 https://apihalo.com
 ```
 
-## 第三步：先做一次对话测试
+### 第 3 步：先做一次对话测试
 
 建议先发送一条简单消息验证连通性：
 
@@ -40,7 +42,7 @@ https://apihalo.com
 Reply with OK only.
 ```
 
-## 推荐做法
+## 三、推荐做法
 
 - 第一次接入时，先用普通文本模型验证连通性
 - 连通后再切换到代码模型或多模态模型

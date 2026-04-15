@@ -4,25 +4,36 @@
 
 本页是可选接入页。
 
-只有在你的客户端明确要求 Gemini 原生协议时，才使用本页。默认仍然推荐使用 [OpenAI格式（支持各大原厂模型）](OpenAI格式（支持各大原厂模型）.md)。
+只有在现有客户端明确要求 Gemini 原生协议时，才建议使用本页。默认仍然推荐使用 [OpenAI格式（支持各大原厂模型）](OpenAI格式（支持各大原厂模型）.md)。
 
-## 请求地址
+## 一、适用场景
+
+- 已经使用 Gemini 原生 SDK
+- 现有系统必须调用 Gemini 原生协议
+- 目标模型已经开放 Gemini 原生能力
+
+## 二、接入前准备
+
+| 配置项 | 推荐值 |
+| --- | --- |
+| API Key | ApiHalo API Key |
+| 请求地址 | `https://apihalo.com/v1beta/models/{model}:generateContent` |
+| 模型名 | 先通过 `/v1beta/models` 或 `/v1/models` 获取 |
+
+## 三、请求地址
 
 ```text
 POST https://apihalo.com/v1beta/models/{model}:generateContent
 ```
 
-## 鉴权方式
+## 四、鉴权方式
 
-可以使用：
+可以使用以下任一方式：
 
 - `x-goog-api-key: YOUR_API_KEY`
-
-或：
-
 - `?key=YOUR_API_KEY`
 
-## 请求示例
+## 五、请求示例
 
 ```bash
 curl "https://apihalo.com/v1beta/models/YOUR_MODEL_ID:generateContent" \
@@ -39,13 +50,13 @@ curl "https://apihalo.com/v1beta/models/YOUR_MODEL_ID:generateContent" \
   }'
 ```
 
-## 模型列出
+## 六、模型列出
 
 ```bash
 curl "https://apihalo.com/v1beta/models?key=YOUR_API_KEY"
 ```
 
-## 适用建议
+## 七、使用建议
 
-- 只有在现有系统已经依赖 Gemini 原生 SDK 时再用本页
+- 只有在系统已经依赖 Gemini 原生 SDK 时再使用本页
 - 新系统默认优先用 OpenAI 兼容格式

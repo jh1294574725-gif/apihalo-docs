@@ -2,15 +2,21 @@
 
 更新时间：2026-04-15
 
-Rerank 适用于搜索召回后的二次排序。
+Rerank 适用于搜索召回后的二次排序，是检索系统、知识库、RAG 场景中常用的后处理能力。
 
-## 请求地址
+## 一、适用场景
+
+- 站内搜索
+- RAG 召回后二次排序
+- FAQ 命中结果重排
+
+## 二、请求地址
 
 ```text
 POST https://apihalo.com/v1/rerank
 ```
 
-## 请求示例
+## 三、请求示例
 
 ```bash
 curl https://apihalo.com/v1/rerank \
@@ -28,13 +34,8 @@ curl https://apihalo.com/v1/rerank \
   }'
 ```
 
-## 适用场景
-
-- 站内搜索
-- RAG 召回后二次排序
-- FAQ 命中结果重排
-
-## 注意事项
+## 四、最重要的注意事项
 
 - 只有 Rerank 模型才能走本接口
 - 不要把普通聊天模型直接当作 Rerank 模型使用
+- 模型是否可用，以 `/v1/models` 返回结果为准

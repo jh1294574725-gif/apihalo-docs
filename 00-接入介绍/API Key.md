@@ -2,18 +2,29 @@
 
 更新时间：2026-04-15
 
-ApiHalo 所有接口都需要使用你在控制台生成的 `API Key` 进行鉴权。
+ApiHalo 所有公开接口都需要使用控制台生成的 `API Key` 进行鉴权。
 
-## 获取方式
+## 一、API Key 是什么
+
+`API Key` 是调用 ApiHalo 接口的凭证。无论调用的是文本、代码、图像、音频、视频还是开发工具接入，只要是公开接口，都需要先准备一个可用 Key。
+
+## 二、如何获取 API Key
 
 1. 登录 `https://apihalo.com/`
 2. 进入控制台
 3. 创建新的 `API Key`
 4. 复制并妥善保存
 
-## 标准鉴权方式
+建议不同用途拆分不同 Key，例如：
 
-绝大多数接口都使用标准 `Bearer Token`：
+- 本地开发环境
+- 测试环境
+- 生产环境
+- 第三方工具调用
+
+## 三、标准鉴权方式
+
+绝大多数 OpenAI 兼容接口都使用标准 `Bearer Token`：
 
 ```http
 Authorization: Bearer YOUR_API_KEY
@@ -25,34 +36,53 @@ Authorization: Bearer YOUR_API_KEY
 Content-Type: application/json
 ```
 
-## 安全建议
+## 四、第三方工具里怎么填写
+
+如果工具支持 `OpenAI`、`OpenAI Compatible` 或 `Custom OpenAI`：
+
+- `API Key` 填 ApiHalo API Key
+- `Base URL` 填 ApiHalo Base URL
+- `Model` 使用 `/v1/models` 返回的模型 ID
+
+## 五、不同协议下的头名说明
+
+少数原生协议页会使用不同头名，例如：
+
+| 协议 | 头名 |
+| --- | --- |
+| OpenAI 兼容 | `Authorization: Bearer YOUR_API_KEY` |
+| Anthropic 格式 | `x-api-key: YOUR_API_KEY` |
+| Gemini 格式 | `x-goog-api-key: YOUR_API_KEY` |
+
+虽然头名不同，但本质上仍然填写的是同一个 ApiHalo API Key。
+
+## 六、安全建议
 
 - 不要把 Key 写进前端源码
 - 不要把 Key 提交到 Git 仓库
 - 不要把 Key 出现在公开截图里
 - 建议不同项目、不同环境使用不同 Key
 
-## Key 泄露后怎么处理
+## 七、如果怀疑 Key 泄露
 
-如果怀疑泄露，请直接：
+建议立即执行以下操作：
 
 1. 删除旧 Key
 2. 创建新 Key
 3. 把业务配置切换到新 Key
+4. 检查历史日志、脚本、截图、环境变量是否仍然残留旧 Key
 
-## 第三方工具里怎么填
+## 八、常见问题
 
-如果工具支持 `OpenAI` 或 `OpenAI Compatible`：
+### 1. 为什么已经有上游 Key 了，还不能直接用
 
-- `API Key` 填你的 ApiHalo Key
-- `Base URL` 填 ApiHalo 地址
-- `Model` 用 `/v1/models` 返回的模型 ID
+因为调用方接入的是 ApiHalo，不是上游原始平台，所以必须使用 ApiHalo 控制台生成的 Key。
 
-## 特殊格式说明
+### 2. 为什么返回 401
 
-少数原生协议页会用到其他头名，例如：
+常见原因包括：
 
-- Anthropic 格式会用 `x-api-key`
-- Gemini 格式会用 `x-goog-api-key`
-
-但它们本质上仍然填写的是你的 ApiHalo Key。
+- Key 写错
+- 请求头缺少 `Bearer `
+- Key 已失效、已删除、已禁用
+- 使用了其他平台的 Key

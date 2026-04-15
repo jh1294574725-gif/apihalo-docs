@@ -4,13 +4,13 @@
 
 文档 OCR、图片 OCR、PDF 解析，公开接入时统一优先走多模态聊天接口。
 
-## 推荐地址
+## 一、推荐地址
 
 ```text
 POST https://apihalo.com/v1/chat/completions
 ```
 
-## 图片 OCR 示例
+## 二、图片 OCR 示例
 
 ```bash
 curl https://apihalo.com/v1/chat/completions \
@@ -35,7 +35,7 @@ curl https://apihalo.com/v1/chat/completions \
   }'
 ```
 
-## PDF / 文件 OCR 示例
+## 三、PDF / 文件 OCR 示例
 
 ```bash
 curl https://apihalo.com/v1/chat/completions \
@@ -61,7 +61,7 @@ curl https://apihalo.com/v1/chat/completions \
   }'
 ```
 
-## 说明
+## 四、说明
 
 - 公开接入不要依赖 `/v1/files`
 - 文档解析能力是否可用，以模型和账号开通情况为准

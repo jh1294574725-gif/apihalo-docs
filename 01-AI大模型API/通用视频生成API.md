@@ -2,9 +2,24 @@
 
 更新时间：2026-04-15
 
-如果你的账号已开通 OpenAI 兼容视频能力，优先使用本页。
+如果当前 Key 已开通 OpenAI 兼容视频能力，优先使用本页。
 
-## 提交任务
+## 一、适用场景
+
+- 标准 OpenAI 兼容视频模型
+- 文生视频
+- 图生视频
+
+## 二、基本调用流程
+
+视频生成通常是异步任务，推荐流程如下：
+
+1. 提交任务
+2. 获取 `task_id`
+3. 查询任务状态
+4. 成功后获取视频内容
+
+## 三、提交任务
 
 ```bash
 curl https://apihalo.com/v1/videos \
@@ -23,22 +38,22 @@ curl https://apihalo.com/v1/videos \
   -F "input_reference=@/path/to/reference.jpg"
 ```
 
-## 查询任务状态
+## 四、查询任务状态
 
 ```bash
 curl https://apihalo.com/v1/videos/YOUR_TASK_ID \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
-## 获取视频内容
+## 五、获取视频内容
 
 ```bash
 curl -L https://apihalo.com/v1/videos/YOUR_TASK_ID/content \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
-## 适用建议
+## 六、使用建议
 
-- 标准 OpenAI 兼容视频模型优先看本页
-- 如果你使用的是豆包专项视频能力，再看 [豆包系列-视频生成](豆包系列-视频生成.md)
+- 标准 OpenAI 兼容视频模型优先使用本页
+- 如果调用的是豆包专项视频能力，再看 [豆包系列-视频生成](豆包系列-视频生成.md)
 - 视频生成通常是异步任务，不要按聊天接口理解
