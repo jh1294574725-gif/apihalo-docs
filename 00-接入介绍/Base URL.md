@@ -34,12 +34,12 @@ https://apihalo.com
 
 - `https://apihalo.com/v1/`
 - `https://apihalo.com/v1/chat/completions`
-- `https://openrouter.ai/api/v1`
+- 其他平台提供的 API 地址
 
 原因如下：
 
 - Base URL 只填网关根地址，不要直接填某个具体接口路径
-- 不要在公开接入中直接填写上游地址
+- 不要把其他平台地址直接当作 ApiHalo 的 Base URL
 - 如果路径写到了具体接口，很多 SDK 会继续再拼一次接口，导致请求失败
 
 ## 五、常用完整接口示例

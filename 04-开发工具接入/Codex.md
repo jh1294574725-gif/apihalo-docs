@@ -104,6 +104,8 @@ env_key_instructions = "Set APIHALO_API_KEY in your environment"
 - `wire_api = "responses"`：Codex 自定义 provider 使用 `Responses API`
 - `env_key`：表示让 Codex 从环境变量读取 ApiHalo Key
 
+完成标准接入只需要以上这些核心字段。网络上如果看到其他示例带有额外配置项，请以你当前 Codex 版本的实际要求为准；在没有明确要求时，不需要额外补写。
+
 ### 第 4 步：设置环境变量
 
 ### macOS / Linux

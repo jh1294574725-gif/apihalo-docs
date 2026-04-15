@@ -74,9 +74,9 @@ Content-Type: application/json
 
 ## 八、常见问题
 
-### 1. 为什么已经有上游 Key 了，还不能直接用
+### 1. 为什么已经有其他平台的 Key 了，还不能直接用
 
-因为调用方接入的是 ApiHalo，不是上游原始平台，所以必须使用 ApiHalo 控制台生成的 Key。
+因为调用方真正接入的是 ApiHalo，所以必须使用 ApiHalo 控制台生成的 Key。
 
 ### 2. 为什么返回 401
 
