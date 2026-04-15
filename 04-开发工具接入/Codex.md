@@ -11,23 +11,17 @@ Codex 自定义 Provider 使用的是 `Responses API`，因此接入前应先完
 - Codex CLI
 - Codex IDE Extension
 
-## 接入前准备
+## 一、接入前准备
 
-请先准备以下信息：
+在开始配置前，请先准备以下 3 项核心信息：
 
-- ApiHalo 的 `Base URL`
-- ApiHalo 的 `API Key`
+- ApiHalo API Key
+- ApiHalo Base URL：`https://apihalo.com/v1`
 - 一个已经验证可用于 `Responses API` 的模型 ID
 
-默认地址：
+建议先通过 `GET /v1/models` 获取可用模型，再对目标模型做一次 `POST /v1/responses` 测试。
 
-```text
-https://apihalo.com/v1
-```
-
-## 第一步：获取可用模型
-
-先调用：
+### 模型获取方式
 
 ```bash
 curl https://apihalo.com/v1/models \
@@ -42,9 +36,7 @@ curl https://apihalo.com/v1/models \
 
 如果 `/v1/models` 返回数据中包含 `supported_endpoint_types` 字段，优先选择包含 `openai-response` 的模型。
 
-## 第二步：先测试 `Responses API`
-
-在写入 Codex 配置前，先用候选模型做一次测试：
+### Responses API 连通性测试
 
 ```bash
 curl https://apihalo.com/v1/responses \
@@ -56,30 +48,39 @@ curl https://apihalo.com/v1/responses \
   }'
 ```
 
-判断方式：
+如果返回正常 JSON，并包含响应内容，说明该模型可用于 Codex。
 
-- 如果返回正常 JSON，并包含响应内容，说明该模型可用于 Codex
-- 如果返回模型不可用、参数不支持或接口错误，请更换模型后重新测试
+## 二、快速接入指南
 
-这一步很重要，因为并不是所有模型都适合 `Responses API` 场景。
+### 第 1 步：安装 Codex CLI
 
-## 第三步：找到 `config.toml`
+如果本机还没有安装 Codex CLI，可先执行：
 
-Codex 官方文档说明，用户级配置文件路径为：
-
-```text
-~/.codex/config.toml
+```bash
+npm install -g @openai/codex
 ```
 
-如果你在项目内单独配置，也可以使用：
+安装完成后，可用以下命令检查是否安装成功：
 
-```text
-.codex/config.toml
+```bash
+codex --version
 ```
 
-如果你使用的是 Codex IDE Extension，也可以在设置里直接打开 `config.toml`。
+### 第 2 步：找到或创建 `config.toml`
 
-## 第四步：写入 ApiHalo Provider
+Codex 官方推荐通过 `config.toml` 配置自定义 Provider。
+
+常见位置如下：
+
+```text
+macOS / Linux: ~/.codex/config.toml
+Windows: C:\Users\你的用户名\.codex\config.toml
+项目目录: .codex/config.toml
+```
+
+如果文件不存在，直接创建即可。
+
+### 第 3 步：写入 ApiHalo Provider 配置
 
 把下面内容写入 `config.toml`：
 
@@ -95,7 +96,7 @@ env_key = "APIHALO_API_KEY"
 env_key_instructions = "Set APIHALO_API_KEY in your environment"
 ```
 
-说明：
+参数说明：
 
 - `model`：替换为你从 `/v1/models` 获取到的真实模型 ID
 - `model_provider`：这里固定写成自定义 provider 名称，例如 `apihalo`
@@ -103,7 +104,7 @@ env_key_instructions = "Set APIHALO_API_KEY in your environment"
 - `wire_api = "responses"`：Codex 自定义 provider 使用 `Responses API`
 - `env_key`：表示让 Codex 从环境变量读取 ApiHalo Key
 
-## 第五步：设置环境变量
+### 第 4 步：设置环境变量
 
 ### macOS / Linux
 
@@ -119,13 +120,42 @@ export APIHALO_API_KEY="YOUR_API_KEY"
 $env:APIHALO_API_KEY="YOUR_API_KEY"
 ```
 
-## 第六步：启动 Codex
+如果希望持久写入当前用户环境变量，可使用：
+
+```powershell
+[System.Environment]::SetEnvironmentVariable("APIHALO_API_KEY", "YOUR_API_KEY", "User")
+```
+
+### 第 5 步：启动并测试 Codex
 
 完成配置后重新启动 Codex。
 
+在项目目录中运行：
+
+```bash
+codex
+```
+
 如果配置正确，Codex 会通过 `apihalo` 这个自定义 provider 调用 ApiHalo。
 
-## 完整示例
+建议第一次启动后先输入一条最小测试指令，例如：
+
+```text
+请简要概述当前仓库的目录结构。
+```
+
+## 三、在 VS Code 中使用扩展
+
+Codex CLI 与 Codex IDE Extension 共用同一套底层配置。
+
+只要已经完成：
+
+- `config.toml` 配置
+- `APIHALO_API_KEY` 环境变量设置
+
+那么在 VS Code 中安装 Codex 扩展后，也可以直接复用这套配置。
+
+## 四、完整示例
 
 ```toml
 model = "YOUR_MODEL_ID"
@@ -139,7 +169,7 @@ env_key = "APIHALO_API_KEY"
 env_key_instructions = "Set APIHALO_API_KEY in your environment"
 ```
 
-## 常见问题
+## 五、常见问题
 
 ### 1. 为什么要先测试 `/v1/responses`
 
@@ -164,6 +194,23 @@ Codex 自定义 provider 的 `wire_api` 应使用 `responses`。
 ### 6. 如果 `/v1/models` 里没有明显标注 `openai-response` 怎么办
 
 直接对目标模型做一次 `/v1/responses` 测试。只要测试通过，就可以继续接入 Codex。
+
+### 7. 启动后提示认证失败怎么办
+
+- 确认环境变量名是否为 `APIHALO_API_KEY`
+- 确认环境变量值中没有手动加 `Bearer ` 前缀
+- 如果是 Windows 持久环境变量，写入后请重新打开终端
+
+### 8. 启动后提示模型不存在怎么办
+
+- 检查 `config.toml` 中的 `model` 是否来自 `GET /v1/models`
+- 不要直接填写其他平台展示的模型名
+
+### 9. 接通了，但体验不稳定怎么办
+
+- 优先确认目标模型是否适合 `Responses API`
+- 确认 `wire_api = "responses"` 没有写错
+- 如果更换模型后恢复正常，说明原模型并不适合 Codex 场景
 
 ## 使用建议
 
