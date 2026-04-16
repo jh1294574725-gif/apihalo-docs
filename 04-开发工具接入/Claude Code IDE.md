@@ -1,42 +1,68 @@
 # Claude Code IDE
 
-更新时间：2026-04-15
+更新时间：2026-04-16
 
-本页适用于支持自定义 OpenAI 网关的 IDE 插件版 Claude Code。
+本页适用于本机 IDE 中运行的 Claude Code 集成，前提是该集成复用本机 Claude Code 安装与环境变量。
 
-## 一、接入前准备
+如果你的 IDE 插件只接受固定官方登录，或不读取本机 Claude Code 配置，请不要套用本页。
 
-- ApiHalo API Key
-- ApiHalo Base URL
-- 一个来自 `GET /v1/models` 的真实模型 ID
+## 一、先完成 Claude Code 主配置
 
-## 二、快速接入
+先按 [Claude Code](Claude%20Code.md) 页面完成本机配置，确保以下三项已经可用：
 
-### 第 1 步：先获取模型
+- `ANTHROPIC_BASE_URL`
+- `ANTHROPIC_API_KEY`
+- `ANTHROPIC_MODEL`
+
+并且已经能在终端里正常运行：
 
 ```bash
-curl https://apihalo.com/v1/models \
-  -H "Authorization: Bearer YOUR_API_KEY"
+claude
 ```
 
-### 第 2 步：在插件设置中填写
+## 二、让 IDE 读取同一套配置
 
-```text
-# 基础配置
-Base URL = "https://apihalo.com/v1"
-API Key = "你的 ApiHalo API Key"
-Model = "请替换为 /v1/models 返回的真实模型 ID"
-```
+推荐做法：
 
-### 第 3 步：保存并测试
+1. 先在终端里确认 `claude` 可正常调用 ApiHalo
+2. 再从同一台机器打开 IDE
+3. 使用本机 Claude Code 集成或扩展
 
-保存配置后，建议先发送一个短请求验证连通性，例如：
+如果 IDE 需要选择 Claude Code 可执行文件，请填写本机 `claude` 命令对应的安装路径。
+
+## 三、第一次连接建议
+
+建议首次在 IDE 中执行一个最小请求，例如：
 
 ```text
 Reply with OK only.
 ```
 
-## 三、常见问题
+如果可以正常返回内容，说明 IDE 集成已经复用本机 Claude Code 的配置。
 
-- 如果插件会自动拼接 `/v1`，Base URL 只填 `https://apihalo.com`
-- 如果插件只接受固定官方供应商，请不要强行照搬本页
+## 四、常见问题
+
+### 1. 为什么这里不再填写 `Base URL`、`API Key`、`Model`
+
+因为可保证的方式不是在 IDE 面板里手填 OpenAI 风格字段，而是让 IDE 复用已经配置好的本机 Claude Code。
+
+### 2. 如果 IDE 里连不上，但终端里可以连上怎么办
+
+通常说明 IDE 进程没有读取到同一组环境变量。请优先检查：
+
+- IDE 是否运行在本机环境中
+- IDE 是否能读取 `ANTHROPIC_BASE_URL`
+- IDE 是否能读取 `ANTHROPIC_API_KEY`
+- IDE 是否能读取 `ANTHROPIC_MODEL`
+
+### 3. 后面如果更换上游，这页还有效吗
+
+有效。
+
+只要客户继续使用：
+
+- ApiHalo 的域名
+- ApiHalo 的 API Key
+- ApiHalo 返回的模型 ID
+
+IDE 侧仍然只需要复用 Claude Code 的本地配置，不需要感知上游变化。
