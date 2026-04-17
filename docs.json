@@ -27,21 +27,16 @@
         "group": "AI大模型API",
         "pages": [
           "01-AI大模型API/OpenAI格式（支持各大原厂模型）",
-          "01-AI大模型API/Anthropic格式",
-          "01-AI大模型API/Midjourney格式",
-          "01-AI大模型API/NanoBanana",
           "01-AI大模型API/通用视频生成API",
-          "01-AI大模型API/豆包系列-视频生成",
           "01-AI大模型API/豆包系列-绘画",
-          "01-AI大模型API/Rerank重排序模型",
-          "01-AI大模型API/文生音乐Suno",
+          "01-AI大模型API/豆包系列-视频生成",
           "01-AI大模型API/flux系列",
           "01-AI大模型API/谷歌Gemini接口",
-          "01-AI大模型API/grok视频"
+          "01-AI大模型API/Rerank重排序模型"
         ]
       },
       {
-        "group": "搜索阅读API",
+        "group": "搜索与文件能力",
         "pages": [
           "02-搜索阅读API/网页阅读API",
           "02-搜索阅读API/联网搜索API",
